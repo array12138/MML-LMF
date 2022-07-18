@@ -17,11 +17,11 @@ nparition = length(all_parition);
 d = size(X,2);
 for i = 1:nparition
     one_parition = find(nlabel_list == all_parition(i));
-    others = find(nlabel_list ~= all_parition(i));
+ 
     w_Cj = sum(weight.w_ij(one_parition(:),:),1);
    
     temp_matrix = zeros(d,d);
-    for j = 1:length(others) % w{C,j}*Lj in other C
+    for j = 1:length(nlabel_list) % w{C,j}*Lj in other C
         temp_matrix = temp_matrix + w_Cj(others(j)) * npairs_metric{others(j)};
     end
     temp_matrix2 = zeros(d,d);
@@ -30,7 +30,7 @@ for i = 1:nparition
     end
     part2 = parameter.mu * temp_matrix-temp_matrix2;
     
-    alpha_value = parameter.beta *length(one_parition) + parameter.mu * sum(w_Cj(others(:)));
+    alpha_value = parameter.beta *length(one_parition) + parameter.mu * sum(w_Cj(:));
     all_invmetric = cell(length(one_parition)+1,1); %Store intermediate variables for each inverse avoidance
     for j = 1:length(one_parition)+1
         if j == 1
