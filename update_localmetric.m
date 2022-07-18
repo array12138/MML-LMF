@@ -22,7 +22,7 @@ for i = 1:nparition
    
     temp_matrix = zeros(d,d);
     for j = 1:length(nlabel_list) % w{C,j}*Lj in other C
-        temp_matrix = temp_matrix + w_Cj(others(j)) * npairs_metric{others(j)};
+        temp_matrix = temp_matrix + w_Cj(j) * npairs_metric{j};
     end
     temp_matrix2 = zeros(d,d);
     for j = 1:length(one_parition)% qt* Xij* L0 in C
